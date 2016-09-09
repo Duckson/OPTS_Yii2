@@ -41,9 +41,9 @@ $config = [
         'urlManager' => [
             'class' => 'yii\web\UrlManager',
             // Убираем index.php
-            'showScriptName' => false,
+            'showScriptName' => true,
             // Убираем r= routes
-            'enablePrettyUrl' => true,
+            'enablePrettyUrl' => false,
             'rules' => array(
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
