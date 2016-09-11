@@ -34,6 +34,31 @@ class PracticesController extends Controller
         ]);
     }
 
+    public function actionCreate(){
+        $model = new PracticeTypes();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['list']);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['list']);
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+    }
+
     public function actionDelete($id){
         try {
             $this->findModel($id)->delete();

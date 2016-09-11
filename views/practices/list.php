@@ -1,14 +1,16 @@
 <?php
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ListView;
 use yii\widgets\ActiveForm;
+/* @var $model app\models\PracticeTypes */
 
-$this->title = 'Типы Практик';
+$this->title = 'Список типов практики';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="site-list">
-    <h2>Список типов практики</h2>
+    <h2><?= Html::encode($this->title) ?></h2>
     <div>
         <? if (!empty(Yii::$app->getSession()->getFlash('error'))): ?>
             <span class="error-summary"><?= Yii::$app->getSession()->getFlash('error'); ?></span><br>
@@ -16,15 +18,21 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <div class="practices-search">
         <?php
-        $form = ActiveForm::begin();
-        $form->method = 'get';
+        $form = ActiveForm::begin([
+            'method' => 'get',
+            'action' => Url::to(['practices/list'])
+        ]);
         ?>
         <div class="flex-row">
             <?= $form->field($searchModel, 'name')->label('Название') ?>
 
             <?= Html::submitButton('', ['class' => 'btn btn-success glyphicon glyphicon-search btn-submit']) ?>
+            <a class="btn btn-default btn-reset" href="<?= Url::canonical() ?>"><span>Сброс</span></a>
         </div>
         <?php ActiveForm::end(); ?>
+        <p>
+            <?= Html::a('Создать тип практики', ['create'], ['class' => 'btn btn-success']) ?>
+        </p>
     </div>
     <?= ListView::widget([
         'dataProvider' => $practicesProvider,

@@ -41,3 +41,11 @@
     width: 40px;
     align-self: center;
 }
+
+.btn-reset{
+    margin-left: 10px;
+    height: 40px;
+    width: auto;
+    align-self: center;
+}
+
