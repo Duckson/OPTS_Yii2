@@ -9,6 +9,14 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
+Breadcrumbs::widget([
+    'homeLink' => [
+        'label' => 'Домой',
+        'url' => Yii::$app->homeUrl,
+    ],
+    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+   ]);
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -55,7 +63,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">#Утка <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>

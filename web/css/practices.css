@@ -1,0 +1,43 @@
+.practices-list-item{
+    width: 33%;
+    height: 50px;
+    border: solid 1px darkgray;
+    border-radius: 4px;
+    margin: 1px;
+}
+
+.list-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
+.summary{
+    width: 100%;
+}
+
+.height-100{
+    height: 100%;
+}
+
+.margin-5{
+    margin: 5px;
+}
+
+.practices-search{
+    width: 40%;
+}
+
+.inline{
+    display: inline;
+}
+
+.flex-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.btn-submit{
+    margin-left: 10px;
+    height: 40px;
+    width: 40px;
+    align-self: center;
+}
