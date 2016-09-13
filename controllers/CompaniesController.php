@@ -5,17 +5,18 @@ namespace app\controllers;
 use Yii;
 use yii\db\Exception;
 use yii\web\Controller;
-use app\models\PracticeTypes;
-use app\models\PracticeTypesSearch;
+use app\models\Companies;
+use app\models\CompaniesSearch;
 use yii\web\NotFoundHttpException;
 
-class PracticesController extends Controller
+
+class CompaniesController extends Controller
 {
     public $layout = "main";
 
     protected function findModel($id)
     {
-        if (($model = PracticeTypes::findOne($id)) !== null) {
+        if (($model = Companies::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -24,21 +25,30 @@ class PracticesController extends Controller
 
     public function actionList()
     {
-        $searchModel = new PracticeTypesSearch();
-        $practicesProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $searchModel = new CompaniesSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('list', [
-            'practicesProvider' => $practicesProvider,
             'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
-    public function actionCreate(){
-        $model = new PracticeTypes();
+
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+
+    public function actionCreate()
+    {
+        $model = new Companies();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['list']);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -46,18 +56,20 @@ class PracticesController extends Controller
         }
     }
 
+
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['list']);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
             ]);
         }
     }
+
 
     public function actionDelete($id){
         try {

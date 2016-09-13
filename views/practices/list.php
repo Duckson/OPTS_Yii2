@@ -11,11 +11,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="site-list">
     <h2><?= Html::encode($this->title) ?></h2>
-    <div>
         <? if (!empty(Yii::$app->getSession()->getFlash('error'))): ?>
-            <span class="error-summary"><?= Yii::$app->getSession()->getFlash('error'); ?></span><br>
+            <div class="error-summary"><?= Yii::$app->getSession()->getFlash('error'); ?></div>
         <? endif; ?>
-    </div>
     <div class="practices-search">
         <?php
         $form = ActiveForm::begin([
@@ -30,10 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
             <a class="btn btn-default btn-reset" href="<?= Url::canonical() ?>"><span>Сброс</span></a>
         </div>
         <?php ActiveForm::end(); ?>
-        <p>
-            <?= Html::a('Создать тип практики', ['create'], ['class' => 'btn btn-success']) ?>
-        </p>
     </div>
+    <p>
+        <?= Html::a('Создать тип практики', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
     <?= ListView::widget([
         'dataProvider' => $practicesProvider,
         'itemView' => '_list',
