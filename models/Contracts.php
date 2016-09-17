@@ -64,7 +64,7 @@ class Contracts extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCompany()
+    public function getCompanies()
     {
         return $this->hasOne(Companies::className(), ['id' => 'company_id']);
     }
