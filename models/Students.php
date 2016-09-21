@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 
+
 /**
  * This is the model class for table "students".
  *
@@ -13,6 +14,8 @@ use Yii;
  *
  * @property StudentAppLink[] $studentAppLinks
  * @property StudentGroups $group
+ * @property Applications $applications
+ * @property Faculties $faculty
  */
 class Students extends \yii\db\ActiveRecord
 {
@@ -56,6 +59,9 @@ class Students extends \yii\db\ActiveRecord
         return $this->hasMany(StudentAppLink::className(), ['student_login' => 'login']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getApplications()
     {
         return $this->hasMany(Applications::className(), ['id' => 'app_id'])->via('studentAppLinks');
@@ -67,5 +73,13 @@ class Students extends \yii\db\ActiveRecord
     public function getGroup()
     {
         return $this->hasOne(StudentGroups::className(), ['id' => 'group_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFaculty()
+    {
+        return $this->hasOne(Faculties::className(), ['id' => 'faculty_id'])->via('group');
     }
 }
