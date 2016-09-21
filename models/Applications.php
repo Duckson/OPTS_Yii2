@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\StudentAppLink;
 
 /**
  * This is the model class for table "applications".
@@ -16,6 +17,7 @@ use Yii;
  * @property Contracts $contract
  * @property PracticeTypes $practiceType
  * @property StudentAppLink[] $studentAppLinks
+ * @property Students $students
  */
 class Applications extends \yii\db\ActiveRecord
 {
@@ -48,8 +50,8 @@ class Applications extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'contract_id' => 'Contract ID',
-            'start_date' => 'Start Date',
-            'end_date' => 'End Date',
+            'start_date' => 'Дата начала',
+            'end_date' => 'Дата конца',
             'practice_type_id' => 'Practice Type ID',
         ];
     }
@@ -77,4 +79,22 @@ class Applications extends \yii\db\ActiveRecord
     {
         return $this->hasMany(StudentAppLink::className(), ['app_id' => 'id']);
     }
+
+    public function getStudents()
+    {
+        return $this->hasMany(Students::className(), ['login' => 'student_login'])->via('studentAppLinks');
+    }
+
+    public function beforeDelete()
+    {
+        if (parent::beforeDelete()) {
+            if($this->getStudentAppLinks()->exists()){
+                StudentAppLink::deleteAll(['app_id' => $this->id]);
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

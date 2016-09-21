@@ -56,6 +56,11 @@ class Students extends \yii\db\ActiveRecord
         return $this->hasMany(StudentAppLink::className(), ['student_login' => 'login']);
     }
 
+    public function getApplications()
+    {
+        return $this->hasMany(Applications::className(), ['id' => 'app_id'])->via('studentAppLinks');
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

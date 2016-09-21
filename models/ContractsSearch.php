@@ -26,12 +26,12 @@ class ContractsSearch extends Contracts
 
     public function search($params)
     {
-        $query = Contracts::find()->joinWith(['companies']);
+        $query = Contracts::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 40,
+                'pageSize' => 20,
             ],
         ]);
 

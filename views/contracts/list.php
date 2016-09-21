@@ -25,8 +25,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
             [
                 'attribute' => 'company_name',
                 'value' => 'companies.name',
@@ -38,7 +36,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Дата подписания',
             ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+            ],
         ],
     ]); ?>
 </div>

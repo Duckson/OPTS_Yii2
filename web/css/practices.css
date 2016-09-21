@@ -1,6 +1,6 @@
 .practices-list-item{
     width: 33%;
-    height: 50px;
+    height: auto;
     border: solid 1px darkgray;
     border-radius: 4px;
     margin: 1px;
@@ -35,6 +35,31 @@
     flex-direction: row;
 }
 
+.flex-column{
+    display: flex;
+    flex-direction: column;
+}
+
+.contracts-flex-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.contracts-flex-row > *{
+    flex-grow: 1;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.contracts-flex-row > *:last-child{
+    margin-right: 0;
+}
+
+.contracts-flex-row > *:first-child{
+    margin-left: 0;
+}
+
 .btn-submit{
     margin-left: 10px;
     height: 40px;
@@ -48,4 +73,23 @@
     width: auto;
     align-self: center;
 }
+
+.padding-none{
+    padding: 0;
+}
+
+#student-button{
+    width: 180px;
+    height: 35px;
+    margin-left: 20px;
+}
+
+.marg-bottom-20{
+    margin-bottom: 20px;
+}
+
+.marg-right-20{
+    margin-right: 20px;
+}
+
 
