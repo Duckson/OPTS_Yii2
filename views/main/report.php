@@ -18,11 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             [
-                'attribute' => 'login',
-                'value' => 'login',
-                'visible' => 0,
-            ],
-            [
                 'attribute' => 'name',
                 'value' => 'name',
                 'label' => 'ФИО',
@@ -40,15 +35,32 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Факультет',
             ],
             [
-                'attribute' => 'has_app',
+                'attribute' => 'has_apps',
                 'value' => function ($model, $key, $index, $column) {
                     /* @var $model app\models\Students */
-                        if($model->getApplications()->exists()){
-                            return '✓';
-                        } else return 'X';
+                    return $model->getHasApps();
                 },
                 'enableSorting' => true,
                 'label' => 'Проходит ли практику,',
+                'filter' => ["1" => "Да", "2" => "Нет"],
+            ],
+            [
+                'format' => 'raw',
+                'attribute' => 'companies_name',
+                'value' => function ($model, $key, $index, $column) {
+                    /* @var $model app\models\Students */
+                    /* @var $companies app\models\Companies */
+
+                    $result = '<ul>';
+                    foreach ($model->companies as $company) {
+                        $result .= '<li>' . $company->name . '</li>';
+                    }
+                    $result .= '</ul>';
+
+                    return $result;
+                },
+                'enableSorting' => true,
+                'label' => 'Компания',
             ],
 
         ],

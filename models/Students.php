@@ -16,6 +16,7 @@ use Yii;
  * @property StudentGroups $group
  * @property Applications $applications
  * @property Faculties $faculty
+ * @property Companies $companies
  */
 class Students extends \yii\db\ActiveRecord
 {
@@ -81,5 +82,31 @@ class Students extends \yii\db\ActiveRecord
     public function getFaculty()
     {
         return $this->hasOne(Faculties::className(), ['id' => 'faculty_id'])->via('group');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getContracts()
+    {
+        return $this->hasMany(Contracts::className(), ['id' => 'contract_id'])->via('applications');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCompanies()
+    {
+        return $this->hasMany(Companies::className(), ['id' => 'company_id'])->via('contracts');
+    }
+
+    /**
+     * @return string
+     */
+    public function getHasApps()
+    {
+        if($this->getApplications()->exists()){
+            return 'Да';
+        } else return 'Нет';
     }
 }
